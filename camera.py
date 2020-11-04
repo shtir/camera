@@ -6,8 +6,7 @@ import os.path
 from datetime import datetime
 import os
 
-# stop RTSP
-f = os.popen('sudo systemctl stop rtsp-stream.service')
+
 
 # varible 
 directory = "/var/www/html/camera/"
@@ -25,7 +24,9 @@ if not os.path.exists(directory+todayeFolder):
 
 picaddress = directory+todayeFolder+"/"+today.strftime('%H%M%S')+".jpg"
 
-#print(picaddress)
+
+# stop RTSP
+f = os.popen('sudo systemctl stop rtsp-stream.service')
 
 camera = PiCamera()
 camera.resolution = (2560,1936)
@@ -35,8 +36,6 @@ sleep(5)
 camera.capture(picaddress)
 camera.stop_preview()
 
-
-
-
+sleep(5)
 # start RTSP
 f = os.popen('sudo systemctl start rtsp-stream.service')
