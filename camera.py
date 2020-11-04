@@ -4,6 +4,10 @@ from time import sleep
 from picamera import PiCamera
 import os.path
 from datetime import datetime
+import os
+
+# stop RTSP
+f = os.popen('sudo systemctl stop rtsp-stream.service')
 
 # varible 
 directory = "/var/www/html/camera/"
@@ -30,3 +34,9 @@ camera.start_preview()
 sleep(5)
 camera.capture(picaddress)
 camera.stop_preview()
+
+
+
+
+# start RTSP
+f = os.popen('sudo systemctl start rtsp-stream.service')
